@@ -27,8 +27,8 @@ public class RestaurantService {
     public Restaurant registerRestaurant(RestaurantRequestDto restaurantRequestDto) {
         // Save
         Restaurant restaurant = new Restaurant(restaurantRequestDto);
-        restaurantRepository.save(restaurant);
-        return restaurant;
+        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
+        return savedRestaurant;
     }
 
     public List<Restaurant> getAllRestaurants() {

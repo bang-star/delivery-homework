@@ -20,7 +20,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurant/register")
-    public Restaurant registerRestaurant(RestaurantRequestDto restaurantRequestDto){
+    public Restaurant registerRestaurant(@RequestBody RestaurantRequestDto restaurantRequestDto){
         return restaurantService.registerRestaurant(restaurantRequestDto);
     }
 

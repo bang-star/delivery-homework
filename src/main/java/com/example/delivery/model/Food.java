@@ -19,7 +19,6 @@ public class Food {
     @Id
     private Long id;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name="RESTAURANT_ID", nullable = false)
     private Restaurant restaurant;
