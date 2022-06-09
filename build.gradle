@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// 스프링 부트 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok 라이브러리
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	// 스프링 부트 테스트를 위한 라이브러리
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Spring Data JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// H2 Database
+	runtimeOnly 'com.h2database:h2'
+	// MySQL Driver
+	runtimeOnly 'mysql:mysql-connector-java'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
