@@ -1,11 +1,10 @@
 package com.example.delivery.controller;
 
-import com.example.delivery.model.Food;
+import com.example.delivery.dto.FoodRequestDto;
+import com.example.delivery.dto.MenuResponseDto;
 import com.example.delivery.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,8 +17,14 @@ public class FoodController {
         this.foodService = foodService;
     }
 
+    @PostMapping("/restaurant/{restaurantId}/food/register")
+    public void registerFood(@PathVariable Long restaurantId, @RequestBody List<FoodRequestDto> requestDto){
+        foodService.registerFood(restaurantId, requestDto);
+    }
+
     @GetMapping("/restaurant/{restaurantId}/foods")
-    public List<Food> getAllFoods(@PathVariable Long restaurantId){
+    public List<MenuResponseDto> getAllFoods(@PathVariable Long restaurantId){
         return foodService.getAllFoods(restaurantId);
     }
+
 }

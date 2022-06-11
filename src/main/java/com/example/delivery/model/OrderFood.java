@@ -1,20 +1,31 @@
 package com.example.delivery.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
+@NoArgsConstructor
+@Getter
 @Setter
-@Getter // get 함수를 일괄적으로 만들어줍니다.
-@NoArgsConstructor // 기본 생성자를 만들어줍니다.
-@Entity // DB 테이블 역할을 합니다.
+@Entity
+@SequenceGenerator(
+        name = "ORDERFOOD_A",
+        sequenceName = "ORDERFOOD_B",
+        initialValue = 1, allocationSize = 50)
 public class OrderFood {
-    // ID가 자동으로 생성 및 증가합니다.
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDERFOOD_A")
+    @Column(name="ORDERFOOD_ID")
     private Long id;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name="ORDER_ID", nullable = false)
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name="FOOD_ID", nullable = false)
@@ -23,7 +34,19 @@ public class OrderFood {
     @Column(nullable = false)
     private Long quantity;
 
-    @Column
+    @Column(nullable = false)
     private Long price;
 
+
+    public OrderFood(Food food, Long quantity, Long orderPrice) {
+        this.food = food;
+        this.quantity = quantity;
+        this.price = orderPrice;
+    }
+
 }
+
+
+
+
+
