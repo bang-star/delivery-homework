@@ -1,7 +1,5 @@
 package com.example.delivery.controller;
 
-import com.example.delivery.dto.FoodRegisterRequestDto;
-import com.example.delivery.dto.FoodRequestDto;
 import com.example.delivery.dto.RestaurantRequestDto;
 import com.example.delivery.model.Restaurant;
 import com.example.delivery.service.RestaurantService;
@@ -27,11 +25,5 @@ public class RestaurantController {
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants(){
         return restaurantService.getAllRestaurants();
-    }
-
-    @PostMapping("/restaurant/{restaurantId}/food/register")
-    public void registerFood(@PathVariable Long restaurantId, @RequestBody FoodRequestDto requestDto){
-        List<FoodRegisterRequestDto> foodList = requestDto.getFoodList();
-        restaurantService.registerFood(restaurantId, foodList);
     }
 }

@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface FoodReposiotry  extends JpaRepository<Food, Long> {
     boolean existsByNameAndRestaurant(String name, Restaurant restaurant);
+
     List<Food> findAllByRestaurant(Restaurant restaurant);
 }
